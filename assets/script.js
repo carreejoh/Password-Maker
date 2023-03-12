@@ -16,12 +16,16 @@
 
 var generateBtn = document.querySelector("#generate");
 
+var pswdcharup = false;
+var pswdchardown = false;
+var pswdcharnum = false;
+var pswdcharspec = false;
 
 function pswdprompts() {
   var pswdlength = prompt("Enter a length for password, must be between 8-128 characters"); 
   var pswdlengthnumber = Number(pswdlength)
   if (pswdlengthnumber <= 7 || pswdlengthnumber >= 128) {
-    alert("Invalid Length");
+    return false;
  } else {
    console.log(pswdlengthnumber);
    return pswdlengthnumber;
@@ -29,12 +33,14 @@ function pswdprompts() {
 }
 
 function pswdchar() {
-  var pswdcharup = confirm("Do you want uppercase letters in your password? Ok for yes, Cancel for no");
-  var pswdchardown = confirm("Do you want lowercase letters in your password? Ok for yes, Cancel for no");
-  var pswdcharnum = confirm("Do you want numbers in your password? Ok for yes, Cancel for no")
-  if (pswdcharup == True) {
-    pswd
-  }
+  pswdcharup = confirm("Do you want uppercase letters in your password? Ok for yes, Cancel for no");
+  pswdchardown = confirm("Do you want lowercase letters in your password? Ok for yes, Cancel for no");
+  pswdcharnum = confirm("Do you want numbers in your password? Ok for yes, Cancel for no");
+  pswdcharspec = confirm("Do you want special characters in your password? Ok for yes, Cancel for no");
+  if (pswdcharup == false && pswdchardown == false && pswdcharnum == false && pswdcharspec == false) {
+    alert("No character types were picked");
+  } 
+ 
 }
 
 
@@ -42,8 +48,14 @@ function pswdchar() {
 
 function writePassword() {
 
-  var password = pswdprompts();
-  var asdfadsf = pswdchar();
+  var passwordlength = pswdprompts(); 
+  if (passwordlength === false) {
+    alert("Invalid Length");
+  } 
+  pswdchar (); 
+  console.log(pswdchar(pswdchardown));
+
+
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
 
